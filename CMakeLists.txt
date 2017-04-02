@@ -74,11 +74,14 @@ ExternalProject_Add(
 )
 
 ## libtermcap
+set(TERMCAP_PREFIX ${SYSTEM_LIB_DIR}/termcap)
+
+
 ExternalProject_Add(
     termcap
     PREFIX lib
     URL ${LIB_SRC_DIR}/termcap-1.3.1.tar.gz
-    CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${SYSTEM_LIB_DIR}/termcap
+    CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${TERMCAP_PREFIX}
     BUILD_COMMAND $(MAKE)
     INSTALL_COMMAND $(MAKE) install
 )
@@ -89,7 +92,7 @@ ExternalProject_Add(
     PREFIX lib
     DEPENDS termcap
     URL ${LIB_SRC_DIR}/readline-7.0.tar.gz
-    CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${SYSTEM_LIB_DIR}/readline
+    CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${SYSTEM_LIB_DIR}/readline CFLAGS=-I${TERMCAP_PREFIX}/include LDFLAGS=-L${TERMCAP_PREFIX}/lib --enable-shared
     BUILD_COMMAND $(MAKE) LDFLAGS=${SYSTEM_LIB_DIR}/termcap/lib LIBS=libtermcap.a
     INSTALL_COMMAND $(MAKE) install
 )
@@ -102,8 +105,8 @@ ExternalProject_Add(
     URL ${LIB_SRC_DIR}/lua-5.3.4.tar.gz
     URL_HASH MD5=53a9c68bcc0eda58bdc2095ad5cdfc63
     CONFIGURE_COMMAND ""
-    BUILD_COMMAND cd <SOURCE_DIR> && $(MAKE) CPPFLAGS=-I${SYSTEM_LIB_DIR}/readline/include MYLDFLAGS="-L/${SYSTEM_LIB_DIR}/readline/lib" ${SYSTEM} 
-    INSTALL_COMMAND $(MAKE) install
+    BUILD_COMMAND cd <SOURCE_DIR> && $(MAKE) CPPFLAGS=-I${SYSTEM_LIB_DIR}/readline/include LDFLAGS="-L/${SYSTEM_LIB_DIR}/readline/lib -L/${SYSTEM_LIB_DIR}/termcap/lib" LIBS="-lreadline -ltermcap -ldl -lm" ${SYSTEM} 
+    INSTALL_COMMAND cd <SOURCE_DIR> && $(MAKE) install INSTALL_TOP=${SYSTEM_LIB_DIR}/lua
 )
 
 

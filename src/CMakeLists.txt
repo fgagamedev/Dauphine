@@ -1,6 +1,6 @@
 # Directories
-include_directories(${Dauphine_SOURCE_DIR}/include ${SYSTEM_LIB_DIR}/SDL2/include)
-link_directories(${SYSTEM_LIB_DIR}/SDL2/lib)
+include_directories(${Dauphine_SOURCE_DIR}/include ${SYSTEM_LIB_DIR}/SDL2/include ${SYSTEM_LIB_DIR}/lua/include)
+link_directories(${SYSTEM_LIB_DIR}/SDL2/lib ${SYSTEM_LIB_DIR}/lua/lib ${LIB_DIR}/)
 
 # Compile options
 add_compile_options(-std=c++11)
