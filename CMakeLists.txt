@@ -37,7 +37,7 @@ ExternalProject_Add(
     SDL_image
     PREFIX lib
     URL ${LIB_SRC_DIR}/SDL2_image-2.0.1.tar.gz
-    CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${SDL_PREFIX} --with-sdl-prefix=${SDL_PREFIX} ${SDL_IMAGE_CONFIGURE_OPTIONS} 
+    CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${SDL_PREFIX} --with-sdl-prefix=${SDL_PREFIX} 
     BUILD_COMMAND $(MAKE) 
     INSTALL_COMMAND $(MAKE) install
 )
@@ -55,19 +55,20 @@ ExternalProject_Add(
 ##    INSTALL_COMMAND $(MAKE) install
 ##)
 
-#### SDL_ttf
-##ExternalProject_Add(
-##    SDL_ttf
-##    DEPENDS FreeType
-##    PREFIX lib
-##    URL ${LIB_SRC_DIR}/SDL_ttf-2.0.11.tar.gz
-##    CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${SDL_PREFIX} --with-freetype-prefix=${FREETYPE_PREFIX} --with-sdl-prefix=${SDL_PREFIX} ${SDL_TTF_CONFIGURE_OPTIONS} 
-##    BUILD_COMMAND $(MAKE) 
-##    INSTALL_COMMAND $(MAKE) install
-##)
+## SDL_ttf
+ExternalProject_Add(
+    SDL_ttf
+#    DEPENDS FreeType
+    PREFIX lib
+    URL ${LIB_SRC_DIR}/SDL2_ttf-2.0.14.tar.gz
+    #CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${SDL_PREFIX} --with-freetype-prefix=${FREETYPE_PREFIX} --with-sdl-prefix=${SDL_PREFIX} ${SDL_TTF_CONFIGURE_OPTIONS} 
+    CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${SDL_PREFIX} --with-sdl-prefix=${SDL_PREFIX} ${SDL_TTF_CONFIGURE_OPTIONS} 
+    BUILD_COMMAND $(MAKE) 
+    INSTALL_COMMAND $(MAKE) install
+)
 
 # Subdirs
-subdirs(lib)
+subdirs(lib src)
 
 ### Packing
 ##set(CPACK_PACKAGE_NAME "jtj")
