@@ -73,6 +73,40 @@ ExternalProject_Add(
     INSTALL_COMMAND $(MAKE) install
 )
 
+## libtermcap
+ExternalProject_Add(
+    termcap
+    PREFIX lib
+    URL ${LIB_SRC_DIR}/termcap-1.3.1.tar.gz
+    CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${SYSTEM_LIB_DIR}/termcap
+    BUILD_COMMAND $(MAKE)
+    INSTALL_COMMAND $(MAKE) install
+)
+
+## libreadline
+ExternalProject_Add(
+    readline
+    PREFIX lib
+    DEPENDS termcap
+    URL ${LIB_SRC_DIR}/readline-7.0.tar.gz
+    CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${SYSTEM_LIB_DIR}/readline
+    BUILD_COMMAND $(MAKE) LDFLAGS=${SYSTEM_LIB_DIR}/termcap/lib LIBS=libtermcap.a
+    INSTALL_COMMAND $(MAKE) install
+)
+
+## Lua
+ExternalProject_Add(
+    lua
+    PREFIX lib
+    DEPENDS readline
+    URL ${LIB_SRC_DIR}/lua-5.3.4.tar.gz
+    URL_HASH MD5=53a9c68bcc0eda58bdc2095ad5cdfc63
+    CONFIGURE_COMMAND ""
+    BUILD_COMMAND cd <SOURCE_DIR> && $(MAKE) CPPFLAGS=-I${SYSTEM_LIB_DIR}/readline/include MYLDFLAGS="-L/${SYSTEM_LIB_DIR}/readline/lib" ${SYSTEM} 
+    INSTALL_COMMAND $(MAKE) install
+)
+
+
 # Subdirs
 subdirs(lib src)
 
