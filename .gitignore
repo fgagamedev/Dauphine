@@ -28,6 +28,7 @@ html/
 
 # Temporary files, just in case
 *~
+*.swp
 
 # Kate files
 *.kate-swp
