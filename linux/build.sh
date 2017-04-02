@@ -31,7 +31,7 @@ pwd
 cmake ../.. -DCMAKE_TOOLCHAIN_FILE=../../linux/Linux.cmake
 make
 cd ../..
-cp $SYSTEM_BUILD_DIR/$LIB_DIR/tinyxml/libtinyxml.a $LIB_DIR/tinyxml/
+cp $SYSTEM_BUILD_DIR/$LIB_DIR/TmxParser/libtmxparser.a $LIB_DIR/TmxParser/
 #cp $SDL_LIB_DIR/libSDL-1.2.so.0 $SYSTEM_BIN_LIB_DIR
 #cp $SDL_LIB_DIR/libSDL_image-1.2.so.0 $SYSTEM_BIN_LIB_DIR
 #cp $SDL_LIB_DIR/libSDL_ttf-2.0.so.0 $SYSTEM_BIN_LIB_DIR

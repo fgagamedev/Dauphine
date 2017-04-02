@@ -1,1 +1,1 @@
-subdirs(tinyxml)
+subdirs(TmxParser)
