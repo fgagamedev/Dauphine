@@ -42,27 +42,33 @@ ExternalProject_Add(
     INSTALL_COMMAND $(MAKE) install
 )
 
-#### FreeType
-##set(FREETYPE_PREFIX ${SYSTEM_LIB_DIR}/FreeType-2.4)
-##set(FREETYPE_INCLUDE_DIR ${FREETYPE_PREFIX}/include ${FREETYPE_PREFIX}/include/freetype2)
-## 
-##ExternalProject_Add(
-##    FreeType
-##    PREFIX lib
-##    URL ${LIB_SRC_DIR}/freetype-2.4.0.tar.gz
-##    CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${FREETYPE_PREFIX} ${FREETYPE_CONFIGURE_OPTIONS}
-##    BUILD_COMMAND $(MAKE)
-##    INSTALL_COMMAND $(MAKE) install
-##)
 
 ## SDL_ttf
 ExternalProject_Add(
     SDL_ttf
-#    DEPENDS FreeType
     PREFIX lib
     URL ${LIB_SRC_DIR}/SDL2_ttf-2.0.14.tar.gz
-    #CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${SDL_PREFIX} --with-freetype-prefix=${FREETYPE_PREFIX} --with-sdl-prefix=${SDL_PREFIX} ${SDL_TTF_CONFIGURE_OPTIONS} 
-    CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${SDL_PREFIX} --with-sdl-prefix=${SDL_PREFIX} ${SDL_TTF_CONFIGURE_OPTIONS} 
+    CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${SDL_PREFIX} --with-sdl-prefix=${SDL_PREFIX} 
+    BUILD_COMMAND $(MAKE) 
+    INSTALL_COMMAND $(MAKE) install
+)
+
+## SDL_mixer
+ExternalProject_Add(
+    SDL_mixer
+    PREFIX lib
+    URL ${LIB_SRC_DIR}/SDL2_mixer-2.0.1.tar.gz
+    CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${SDL_PREFIX} --with-sdl-prefix=${SDL_PREFIX}
+    BUILD_COMMAND $(MAKE) 
+    INSTALL_COMMAND $(MAKE) install
+)
+
+## SDL_gfx
+ExternalProject_Add(
+    SDL_gfx
+    PREFIX lib
+    URL ${LIB_SRC_DIR}/SDL2_gfx-1.0.3.tar.gz
+    CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${SDL_PREFIX} --with-sdl-prefix=${SDL_PREFIX}
     BUILD_COMMAND $(MAKE) 
     INSTALL_COMMAND $(MAKE) install
 )
