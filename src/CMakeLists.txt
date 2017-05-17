@@ -11,7 +11,7 @@ add_executable(Dauphine main.cpp)
 target_link_libraries(Dauphine DauphineLib ${SYSTEM_LIBRARIES})
 
 # Install files and directories
-#install(TARGETS Jack_the_Janitor DESTINATION jtj/bin)
-#install(PROGRAMS ${SYSTEM_DIR}/JackTheJanitor DESTINATION .)
-#install(DIRECTORY ${SYSTEM_BIN_DIR}/lib/ DESTINATION jtj/lib)
-#install(DIRECTORY ${ROOT_DIR}/resources DESTINATION jtj/)
+install(TARGETS Dauphine DESTINATION dauphine/bin)
+install(PROGRAMS ${SYSTEM_DIR}/Dauphine DESTINATION .)
+install(DIRECTORY ${SYSTEM_BIN_DIR}/lib/ DESTINATION dauphine/lib)
+install(DIRECTORY ${ROOT_DIR}/resources DESTINATION dauphine/)
