@@ -24,9 +24,9 @@ include(ExternalProject)
 ## SDL
 set(SDL_PREFIX ${SYSTEM_LIB_DIR}/SDL2)
 set(SDL_INCLUDE_DIR ${SDL_PREFIX}/include/SDL2)
- 
+
 ExternalProject_Add(
-    SDL 
+    SDL
     PREFIX lib
     URL ${LIB_SRC_DIR}/SDL2-2.0.5.tar.gz
     CMAKE_COMMAND cmake -DCMAKE_INSTALL_PREFIX=${SYSTEM_LIB_DIR}/SDL2
@@ -37,8 +37,8 @@ ExternalProject_Add(
     SDL_image
     PREFIX lib
     URL ${LIB_SRC_DIR}/SDL2_image-2.0.1.tar.gz
-    CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${SDL_PREFIX} --with-sdl-prefix=${SDL_PREFIX} 
-    BUILD_COMMAND $(MAKE) 
+    CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${SDL_PREFIX} --with-sdl-prefix=${SDL_PREFIX}
+    BUILD_COMMAND $(MAKE)
     INSTALL_COMMAND $(MAKE) install
 )
 
@@ -48,8 +48,8 @@ ExternalProject_Add(
     SDL_ttf
     PREFIX lib
     URL ${LIB_SRC_DIR}/SDL2_ttf-2.0.14.tar.gz
-    CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${SDL_PREFIX} --with-sdl-prefix=${SDL_PREFIX} 
-    BUILD_COMMAND $(MAKE) 
+    CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${SDL_PREFIX} --with-sdl-prefix=${SDL_PREFIX}
+    BUILD_COMMAND $(MAKE)
     INSTALL_COMMAND $(MAKE) install
 )
 
@@ -59,7 +59,7 @@ ExternalProject_Add(
     PREFIX lib
     URL ${LIB_SRC_DIR}/SDL2_mixer-2.0.1.tar.gz
     CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${SDL_PREFIX} --with-sdl-prefix=${SDL_PREFIX}
-    BUILD_COMMAND $(MAKE) 
+    BUILD_COMMAND $(MAKE)
     INSTALL_COMMAND $(MAKE) install
 )
 
@@ -69,7 +69,7 @@ ExternalProject_Add(
     PREFIX lib
     URL ${LIB_SRC_DIR}/SDL2_gfx-1.0.3.tar.gz
     CONFIGURE_COMMAND <SOURCE_DIR>/configure --prefix=${SDL_PREFIX} --with-sdl-prefix=${SDL_PREFIX}
-    BUILD_COMMAND $(MAKE) 
+    BUILD_COMMAND $(MAKE)
     INSTALL_COMMAND $(MAKE) install
 )
 
@@ -105,7 +105,8 @@ ExternalProject_Add(
     URL ${LIB_SRC_DIR}/lua-5.3.4.tar.gz
     URL_HASH MD5=53a9c68bcc0eda58bdc2095ad5cdfc63
     CONFIGURE_COMMAND ""
-    BUILD_COMMAND cd <SOURCE_DIR> && $(MAKE) CPPFLAGS=-I${SYSTEM_LIB_DIR}/readline/include LDFLAGS="-L/${SYSTEM_LIB_DIR}/readline/lib -L/${SYSTEM_LIB_DIR}/termcap/lib" LIBS="-lreadline -ltermcap -ldl -lm" ${SYSTEM} 
+    BUILD_COMMAND cd <SOURCE_DIR> && $(MAKE) CPPFLAGS=-I${SYSTEM_LIB_DIR}/readline/include
+    # LDFLAGS="-L/${SYSTEM_LIB_DIR}/readline/lib -L/${SYSTEM_LIB_DIR}/termcap/lib" LIBS="-lreadline -ltermcap -ldl -lm" ${SYSTEM}
     INSTALL_COMMAND cd <SOURCE_DIR> && $(MAKE) install INSTALL_TOP=${SYSTEM_LIB_DIR}/lua
 )
 
@@ -138,19 +139,19 @@ subdirs(lib src)
 ###        PATCH_COMMAND ${CMAKE_COMMAND} -E copy ${PATCHES_DIR}/zlib/Makefile.gcc ${SYSTEM_TMP_LIBS_SRC_DIR}/zlib/win32/Makefile.gcc
 ###        CONFIGURE_COMMAND ""
 ###        BUILD_IN_SOURCE ${SYSTEM_TMP_LIBS_SRC_DIR}/zlib
-###        BUILD_COMMAND BINARY_PATH=${MINGW_BIN_DIR} INCLUDE_PATH=${MINGW_INCLUDE_DIR} LIBRARY_PATH=${MINGW_LIB_DIR} make -f win32/Makefile.gcc 
-###        INSTALL_COMMAND DESTDIR=${SYSTEM_LIBS_DIR} BINARY_PATH=/zlib-1.2/bin INCLUDE_PATH=/zlib-1.2/include LIBRARY_PATH=/zlib-1.2/lib make -f win32/Makefile.gcc install SHARED_MODE=1 
+###        BUILD_COMMAND BINARY_PATH=${MINGW_BIN_DIR} INCLUDE_PATH=${MINGW_INCLUDE_DIR} LIBRARY_PATH=${MINGW_LIB_DIR} make -f win32/Makefile.gcc
+###        INSTALL_COMMAND DESTDIR=${SYSTEM_LIBS_DIR} BINARY_PATH=/zlib-1.2/bin INCLUDE_PATH=/zlib-1.2/include LIBRARY_PATH=/zlib-1.2/lib make -f win32/Makefile.gcc install SHARED_MODE=1
 ###    )
 ###
 ###    ExternalProject_Add(
 ###        libpng
 ###        PREFIX libs
-###        DEPENDS zlib 
+###        DEPENDS zlib
 ###        URL ${LIBS_DIR_SRC}/libpng-1.6.28.tar.gz
 ###        URL_HASH MD5=897ccec1ebfb0922e83c2bfaa1be8748
 ###        CONFIGURE_COMMAND LDFLAGS=${LIBPNG_LDFLAGS} <SOURCE_DIR>/configure --prefix=${SYSTEM_LIBS_DIR}/libpng-1.6 ${LIBPNG_CONFIGURE_OPTIONS}
-###        BUILD_COMMAND make CFLAGS=${LIBPNG_CPPFLAGS} LDFLAGS=${LIBPNG_LDFLAGS} 
-###        INSTALL_COMMAND make install 
+###        BUILD_COMMAND make CFLAGS=${LIBPNG_CPPFLAGS} LDFLAGS=${LIBPNG_LDFLAGS}
+###        INSTALL_COMMAND make install
 ###    )
 ###
 ###endif(${CMAKE_SYSTEM_NAME} MATCHES windows)

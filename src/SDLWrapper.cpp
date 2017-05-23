@@ -68,7 +68,7 @@ bool SDLWrapper::initialize(){
 	}
 
 	// If even one system fails to initialize, returns false.
-	return (successSDL && successIMG && successMixer && successTTF);
+	return (successSDL && successIMG && successTTF);
 }
 
 void SDLWrapper::close(){
